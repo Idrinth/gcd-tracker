@@ -1,0 +1,30 @@
+<Interface xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Windows>
+    <Window name="GCDTracker" handleinput="false" layer="background">
+      <Size>
+        <AbsPoint x="120" y="60" />
+      </Size>
+      <Anchors>
+        <Anchor point="left" relativePoint="left" />
+      </Anchors>
+      <Windows>
+        <DynamicImage name="$parentImage">
+          <Size>
+            <AbsPoint x="60" y="60" />
+          </Size>
+          <Anchors>
+            <Anchor point="center" relativePoint="center" />
+          </Anchors>
+        </DynamicImage>
+        <Label name="$parentText" font="font_clear_small" textalign="center">
+          <Size>
+            <AbsPoint x="120" y="60" />
+          </Size>
+          <Anchors>
+            <Anchor point="center" relativePoint="center" />
+          </Anchors>
+        </Label>
+      </Windows>
+    </Window>
+  </Windows>
+</Interface>
