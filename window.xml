@@ -1,30 +1,45 @@
 <Interface xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Windows>
-    <Window name="GCDTracker" handleinput="false" layer="background">
-      <Size>
-        <AbsPoint x="120" y="60" />
-      </Size>
-      <Anchors>
-        <Anchor point="left" relativePoint="left" />
-      </Anchors>
-      <Windows>
-        <DynamicImage name="$parentImage">
-          <Size>
-            <AbsPoint x="60" y="60" />
-          </Size>
-          <Anchors>
-            <Anchor point="center" relativePoint="center" />
-          </Anchors>
-        </DynamicImage>
-        <Label name="$parentText" font="font_clear_small" textalign="center">
-          <Size>
-            <AbsPoint x="120" y="60" />
-          </Size>
-          <Anchors>
-            <Anchor point="center" relativePoint="center" />
-          </Anchors>
+    <Windows>
+    	<Label name="RvRContribution" font="font_default_text_small" textalign="center" savesettings="true">
+            <Size>
+                <AbsPoint x="200" y="30" />
+            </Size>
+	        <Anchors>
+	            <Anchor point="topleft" relativePoint="topleft" relativeTo="Root">
+	                <AbsPoint x="0" y="0" />
+	            </Anchor>
+	        </Anchors>
         </Label>
-      </Windows>
-    </Window>
-  </Windows>
+    	<Window name="RvRContributionTemplate" handleinput="true">
+            <Size>
+                <AbsPoint x="200" y="30" />
+            </Size>
+    		<Windows>
+    			<Label handleinput="false" name="$parentPairing" font="font_default_text_small" textalign="left">
+                    <Size>
+                        <AbsPoint x="125" y="30" />
+                    </Size>
+                    <Anchors>
+                        <Anchor point="topleft" relativePoint="topleft" relativeTo="$parent">
+                            <AbsPoint x="0" y="6" />
+                        </Anchor>
+                    </Anchors>
+                </Label>
+    			<Label handleinput="false" name="$parentPoints" font="font_default_text_small" textalign="right">
+                    <Size>
+                        <AbsPoint x="75" y="30" />
+                    </Size>
+                    <Anchors>
+                        <Anchor point="topright" relativePoint="topright" relativeTo="$parent">
+                            <AbsPoint x="0" y="6" />
+                        </Anchor>
+                    </Anchors>
+                </Label>
+    		</Windows>
+    		<EventHandlers>
+    			<EventHandler event="OnMouseOver" function="RvRContribution.OnHover"/>
+    			<EventHandler event="OnRButtonUp" function="RvRContribution.OnRButtonUp"/>
+    		</EventHandlers>
+    	</Window>
+    </Windows>
 </Interface>
