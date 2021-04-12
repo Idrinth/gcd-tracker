@@ -14,6 +14,9 @@
     <OnInitialize>
       <CallFunction name="GCDTracker.OnInitialize" />
     </OnInitialize>
+    <OnUpdate>
+      <CallFunction name="GCDTracker.OnUpdate" />
+    </OnUpdate>
     <OnShutdown/>
   </UiMod>
 </ModuleFile>
