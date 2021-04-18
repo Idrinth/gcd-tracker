@@ -29,14 +29,14 @@
         <Anchor point="left" relativePoint="left" />
       </Anchors>
       <Windows>
-        <DynamicImage name="$parentImage">
+        <CircleImage name="$parentImage">
           <Size>
             <AbsPoint x="60" y="60" />
           </Size>
           <Anchors>
             <Anchor point="center" relativePoint="center" />
           </Anchors>
-        </DynamicImage>
+        </CircleImage>
         <Label name="$parentText" font="font_clear_small" textalign="center">
           <Size>
             <AbsPoint x="120" y="60" />

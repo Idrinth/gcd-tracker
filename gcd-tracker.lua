@@ -3,13 +3,31 @@ GCDTracker = {}
 local abilities = {}
 local time = 0
 local mayCast = true
-
+function slash(input)
+    if input == "text" then
+        GCDTracker.Settings.text = not GCDTracker.Settings.text
+        for i=1,3 do
+            WindowSetShowing("GCDTracker-"..i.."Text", GCDTracker.Settings.text)
+        end
+        TextLogAddEntry("Chat", SystemData.ChatLogFilters.SAY, towstring("Toggled text to "..tostring(GCDTracker.Settings.text)))
+    else
+        TextLogAddEntry("Chat", SystemData.ChatLogFilters.SAY, L"Use the command with a toggle: text")
+    end
+end
 function GCDTracker.OnInitialize()
+    GCDTracker.Settings = GCDTracker.Settings or {}
     RegisterEventHandler(SystemData.Events.PLAYER_BEGIN_CAST, "GCDTracker.OnCast")
     CreateWindow("GCDTracker",true)
-    WindowSetShowing("GCDTracker", true)
-    LayoutEditor.RegisterWindow("GCDTracker", L"GCDTracker",L"Global Cooldown Tracker", true, true, true, nil, nil, false, 1, nil, nil )
+    LayoutEditor.RegisterWindow("GCDTracker", L"GCDTracker",L"", false, false, true, nil )
+    if LibSlash and LibSlash.RegisterSlashCmd then
+        LibSlash.RegisterSlashCmd( "gcdtracker", slash )
+        LibSlash.RegisterSlashCmd( "gcdt", slash )
+    end
+    if GCDTracker.Settings.text == nil then
+        GCDTracker.Settings.text = true
+    end
     for i=1,3 do
+        WindowSetShowing("GCDTracker-"..i.."Text", GCDTracker.Settings.text)
         LabelSetTextColor("GCDTracker-"..i.."Text", 255, 255, 255)
     end
 end
@@ -50,12 +68,24 @@ function GCDTracker.OnUpdate(elapsed)
     for i=1,3 do
         if abilities[i] ~= nil then
             WindowSetShowing("GCDTracker-"..i, true)
-            WindowStartAlphaAnimation("GCDTracker-"..i, Window.AnimationType.EASE_OUT, 0.33 * (4 - i), 1 - (.33 * i), 1.4, true, 0, 0)
-            DynamicImageSetTexture(
+            if i > 1 then
+                WindowStartAlphaAnimation(
+                    "GCDTracker-"..i,
+                    Window.AnimationType.EASE_OUT,
+                    0.5 * (4 - i),
+                    0.5 * (3 - i),
+                    1.4,
+                    true,
+                    0,
+                    0
+                )
+            end
+            local winX, winY = WindowGetDimensions("GCDTracker-"..i.."Image")
+            CircleImageSetTexture (
                 "GCDTracker-"..i.."Image",
                 abilities[i].texture,
-                abilities[i].x,
-                abilities[i].y
+                abilities[i].x + winX/2,
+                abilities[i].y + winY/2
             )
             LabelSetText("GCDTracker-"..i.."Text", abilities[i].name)
         else
