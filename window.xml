@@ -29,7 +29,7 @@
         <Anchor point="left" relativePoint="left" />
       </Anchors>
       <Windows>
-        <CircleImage name="$parentImage">
+        <CircleImage name="$parentCircle">
           <Size>
             <AbsPoint x="60" y="60" />
           </Size>
@@ -37,6 +37,14 @@
             <Anchor point="center" relativePoint="center" />
           </Anchors>
         </CircleImage>
+        <DynamicImage name="$parentSquare">
+          <Size>
+            <AbsPoint x="60" y="60" />
+          </Size>
+          <Anchors>
+            <Anchor point="center" relativePoint="center" />
+          </Anchors>
+        </DynamicImage>
         <Label name="$parentText" font="font_clear_small" textalign="center">
           <Size>
             <AbsPoint x="120" y="60" />

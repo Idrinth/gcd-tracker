@@ -10,6 +10,17 @@ function slash(input)
             WindowSetShowing("GCDTracker-"..i.."Text", GCDTracker.Settings.text)
         end
         TextLogAddEntry("Chat", SystemData.ChatLogFilters.SAY, towstring("Toggled text to "..tostring(GCDTracker.Settings.text)))
+    elseif input == "image" then
+        GCDTracker.Settings.image = not GCDTracker.Settings.image
+        for i=1,3 do
+            WindowSetShowing("GCDTracker-"..i.."Circle", GCDTracker.Settings.image)
+            WindowSetShowing("GCDTracker-"..i.."Square", not GCDTracker.Settings.image)
+        end
+        if GCDTracker.Settings.image then
+            TextLogAddEntry("Chat", SystemData.ChatLogFilters.SAY, L"Toggled image to circle")
+        else
+            TextLogAddEntry("Chat", SystemData.ChatLogFilters.SAY, L"Toggled image to square")
+        end
     else
         TextLogAddEntry("Chat", SystemData.ChatLogFilters.SAY, L"Use the command with a toggle: text")
     end
@@ -26,9 +37,14 @@ function GCDTracker.OnInitialize()
     if GCDTracker.Settings.text == nil then
         GCDTracker.Settings.text = true
     end
+    if GCDTracker.Settings.image == nil then
+        GCDTracker.Settings.image = true
+    end
     for i=1,3 do
         WindowSetShowing("GCDTracker-"..i.."Text", GCDTracker.Settings.text)
         LabelSetTextColor("GCDTracker-"..i.."Text", 255, 255, 255)
+        WindowSetShowing("GCDTracker-"..i.."Square", not GCDTracker.Settings.image)
+        WindowSetShowing("GCDTracker-"..i.."Circle", GCDTracker.Settings.image)
     end
 end
 function GCDTracker.OnCast(abilityId)
@@ -82,10 +98,16 @@ function GCDTracker.OnUpdate(elapsed)
             end
             local winX, winY = WindowGetDimensions("GCDTracker-"..i.."Image")
             CircleImageSetTexture (
-                "GCDTracker-"..i.."Image",
+                "GCDTracker-"..i.."Circle",
                 abilities[i].texture,
                 abilities[i].x + winX/2,
                 abilities[i].y + winY/2
+            )
+            DynamicImageSetTexture (
+                "GCDTracker-"..i.."Square",
+                abilities[i].texture,
+                abilities[i].x,
+                abilities[i].y
             )
             LabelSetText("GCDTracker-"..i.."Text", abilities[i].name)
         else
