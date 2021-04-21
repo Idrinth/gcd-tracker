@@ -15,6 +15,7 @@ function slash(input)
         for i=1,3 do
             WindowSetShowing("GCDTracker-"..i.."Circle", GCDTracker.Settings.image)
             WindowSetShowing("GCDTracker-"..i.."Square", not GCDTracker.Settings.image)
+            WindowSetShowing("GCDTracker-"..i.."Text", true)
         end
         if GCDTracker.Settings.image then
             TextLogAddEntry("Chat", SystemData.ChatLogFilters.SAY, L"Toggled image to circle")
@@ -41,10 +42,10 @@ function GCDTracker.OnInitialize()
         GCDTracker.Settings.image = true
     end
     for i=1,3 do
-        WindowSetShowing("GCDTracker-"..i.."Text", GCDTracker.Settings.text)
-        LabelSetTextColor("GCDTracker-"..i.."Text", 255, 255, 255)
         WindowSetShowing("GCDTracker-"..i.."Square", not GCDTracker.Settings.image)
         WindowSetShowing("GCDTracker-"..i.."Circle", GCDTracker.Settings.image)
+        WindowSetShowing("GCDTracker-"..i.."Text", GCDTracker.Settings.text)
+        LabelSetTextColor("GCDTracker-"..i.."Text", 255, 255, 255)
     end
 end
 function GCDTracker.OnCast(abilityId)
